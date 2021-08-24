@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Ver consola</h1>
+    <button onclick="calcularPuntosComparacion()">generar algoritmo 1</button>
+    <button onclick="calcularPalabras()">generar algoritmo 2</button>
+  </body>
+  <script>
+    var arrayAlice = [17, 28, 30];
+    var arrayBob = [99, 16, 8];
+    var resultado = [0, 0];
+
+    function calcularPuntosComparacion() {
+      resultado = [0, 0];
+      for (let i = 0; i < arrayAlice.length; i++) {
+        if (arrayAlice[i] > arrayBob[i]) {
+          resultado[0] += 1;
+        } else if (arrayAlice[i] < arrayBob[i]) {
+          resultado[1] += 1;
+        }
+      }
+      console.log(`El resultado de la comparación es ${resultado}`);
+    }
+
+    var input =
+      "Érase una vez una niñita que lucía una hermosa capa de color rojo. Como la niña la usaba muy a menudo, todos la llamaban Caperucita Roja. Un día, la mamá de Caperucita Roja la llamó y le dijo: —Abuelita no se siente muy bien, he horneado unas galletitas y quiero que tú se las lleves. —Claro que sí —respondió Caperucita Roja, poniéndose su capa y llenando su canasta de galletas recién horneadas. Antes de salir, su mamá le dijo: — Escúchame muy bien, quédate en el camino y nunca hables con extraños. —Yo sé mamá —respondió Caperucita Roja y salió inmediatamente hacia la casa de la abuelita.";
+    var output = {};
+    function calcularPalabras() {
+      input = input
+        .toLowerCase()
+        .replace(/[^a-zA-Z ]/g, "")
+        .replace(/  /g, " ");
+      const palabras = input.split(" ");
+      var existen = [];
+      palabras.forEach((element) => {
+        const existe = existen.find((item) => item.palabra === element);
+
+        if (existe) {
+          existen[existen.indexOf(existe)].cantidad += 1;
+        } else {
+          existen.push({ palabra: element, cantidad: 1 });
+        }
+      });
+      output = existen.reduce(
+        (obj, item) => Object.assign(obj, { [item.palabra]: item.cantidad }),
+        {}
+      );
+      console.log(`El resultado es`, output);
+    }
+  </script>
+</html>
